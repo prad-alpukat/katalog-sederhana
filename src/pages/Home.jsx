@@ -1,9 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [data, setData] = useState(null);
+
   // function get data API
-  const getProducts = () => {
-    console.log("getproducts");
+  const getProducts = async () => {
+    const response = await fetch("https://dummyjson.com/products");
+    try {
+      const dataTemp = await response.json();
+      setData(dataTemp);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
